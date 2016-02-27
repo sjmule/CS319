@@ -1,0 +1,62 @@
+<html>
+
+<head>
+	<title>Validation Form</title>
+	<script src="./validation.js"></script>
+</head>
+
+<body>
+	<form>
+	  <fieldset>
+		<legend>Personal information:</legend>
+			<table>
+				<tr>
+					<td><label class="left">Name</label></td>
+					<td><label class="left">Gender</label></td>
+					<td><label class="left">Address</label></td>
+					<td><label class="left">Email</label></td>
+					<td><label class="left">Phone</label></td>
+				</tr>
+					
+				<tr>
+				<td><input type="text" id="name" class="right"></td>
+					<td><select id="gender" class="right">
+				<option value="">-Please Select-</option>
+				<option value="cismale">Cismale</option>
+				<option value="cisfemale">Cisfemale</option>
+				<option value="apache">Apache attack helicopter</option>
+				<option value="dragon">Dragonkin</option>
+				<option value="mayo">Mayonnaise</option>
+				<option value="pyrofox">Trans-gender pyrofox</option>
+				<option value="dykebike">Dyke-on-a-bike</option>
+				<option value="demiboy">Demiboy</option>
+				<option value="demigirl">Demigirl</option>
+				<option value="demifiend">Demifiend</option>
+				<option value="hadokin">Hado-kin</option>
+				<option value="mtndew">Mountain Dew</option>
+				<option value="preggo">Pregnant</option>
+				<option value="donger">DONGER</option>
+				<option value="cheese">Cheese</option>
+				<option value="mexican">Mexican</option>
+				<option value="sailormoon">Sailor Moon</option>
+				<option value="broom">Broom</option>
+				<option value="twospirit">Two-Spirit</option>
+				<option value="transmas">Transmasculine</option>
+				<option value="binary">Non-Binary</option>
+				<option value="squirrel">Squirrelkin</option>
+				<option value="cupcake">Cupcakekin</option>
+				<option value="fluid">Gender Fluid</option>
+				<option value="other">Other</option>
+				<option value="no">Prefer not to specify</option>
+				</select></td>
+				<td><textarea rows="3" cols="20" id="address" class="right"></textarea></td>
+				<td><input type="text" id="email" class="right"></td>
+				<td><input type="text" id="phone" class="right"></td>
+				</tr>
+			</table>
+		<input type="button" value="submit" onclick="validate();">
+	  </fieldset>
+	</form>
+</body>
+
+</html>

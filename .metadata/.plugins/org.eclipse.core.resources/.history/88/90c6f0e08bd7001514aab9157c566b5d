@@ -1,0 +1,178 @@
+package Lab3;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+public class L3Server
+{
+
+	ServerSocket serverSocket = null;
+	PrintWriter out = null;
+	Scanner in = null;
+	String hst, usr;
+	int clientPort = 5556, serverPort = 5555;
+	ArrayList<Socket> clientList = new ArrayList<Socket>();
+	ArrayList<Handler> handlerList = new ArrayList<Handler>();
+	ArrayList<String> messageList = new ArrayList<String>();
+
+	public static void main(String[] args)
+	{
+		L3Server server = new L3Server(5555);
+	}
+
+	public L3Server(int serverPort)
+	{
+		try
+		{
+			serverSocket = new ServerSocket(serverPort);
+		}
+		catch (IOException io)
+		{
+			System.out.println("Could not listen on port" + serverPort);
+			System.exit(-1);
+		}
+		this.serverPort = serverPort;
+
+		Message m = new Message("M1", this, handlerList);
+		m.start();
+
+		System.out.println("ready");
+
+		while (true)
+		{
+			Socket clientSocket = null;
+			try
+			{
+				clientSocket = serverSocket.accept();
+				System.out.println("new Client connected");
+				clientList.add(clientSocket);
+				handlerList.add(new Handler("" + clientList.size(), clientSocket, this, clientList.size()));
+				handlerList.get(handlerList.size() - 1).start();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+
+		}
+	}
+
+}
+
+
+class Message extends Thread
+{
+
+	L3Server server;
+	ArrayList<Handler> messageHandlerList;
+
+	public Message(String name, L3Server server, ArrayList<Handler> h)
+	{
+		messageHandlerList = h;
+		this.server = server;
+		System.out.println("message up");
+	}
+
+	public void run()
+	{
+		while (true)
+		{
+			try
+			{
+				Thread.sleep(1);
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+			if (!server.messageList.isEmpty())
+			{
+				String msg = server.messageList.remove(0);
+
+				System.out.println("msg get: " + msg.substring(msg.indexOf(',') + 1));
+
+				for (Handler h : messageHandlerList)
+				{
+					System.out.println("did a thing");
+					// if(!msg.substring(0,
+					// msg.indexOf(',')).equals(h.getName())){
+					h.outMsg.add(msg.substring(msg.indexOf(',') + 1));
+					// }
+
+				}
+
+			}
+
+		}
+	}
+}
+
+
+class Handler extends Thread
+{
+
+	Socket c;
+	L3Server s;
+	Scanner in;
+	ArrayList<String> outMsg = new ArrayList<String>();
+	PrintWriter out;
+	int num;
+
+	public Handler(String name, Socket client, L3Server server, int id)
+	{
+		super(name);
+		c = client;
+		s = server;
+
+		System.out.println("handler for " + client.getPort());
+
+		try
+		{
+			in = new Scanner(c.getInputStream());
+			out = new PrintWriter(c.getOutputStream());
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		num = id;
+	}
+
+	public void run()
+	{
+
+		while (true)
+		{
+			try
+			{
+				Thread.sleep(1);
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+			if (!outMsg.isEmpty())
+			{
+
+				System.out.println("sending a msg: " + outMsg.get(0));
+
+				out.println(outMsg.remove(0));
+				out.flush();
+			}
+			if (in.hasNextLine())
+			{
+
+				System.out.println("new msg get (Handler)");
+				s.messageList.add(num + ", " + in.nextLine());
+			}
+
+		}
+
+	}
+
+}

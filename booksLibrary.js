@@ -3,7 +3,6 @@ $(document).ready(function() {
 	myLib.createShelves();
 	myLib.createBooks();
 	myLib.populateShelves();
-	//myLib.readyBooks();
 });
 
 function Library(numShelves, numBooks) {
@@ -64,16 +63,6 @@ Library.prototype.populateShelves = function() {
 	}
 }
 
-Library.prototype.readyBooks = function() {  // Another place to set the status handler, if set in this way all books respond to the last book
-																		// Uncomment method call at top of page to use TODO
-	for(var i = 0; i < this.numBooks; i++) {
-		var book = this.books[i];
-		$("#" + book.number).click(function () {
-		book.displayStatus();
-	});
-	}
-}
-
 function Shelf(shelfID) {
 	this.shelfID = shelfID;
 	this.books = [];
@@ -90,9 +79,11 @@ Shelf.prototype.populateRows = function() {
 		var book = this.books[i];
 		var text = "<p id='" + book.number + "'>" + book.title + "</p>";
 		$(rows[i]).append(text);
-		$("#" + book.number).click(function() { // One place to set the status handler, if set here then all columns just display whatever the bottom one is TODO //
-			book.displayStatus();																																											   //
-		});																																																		   //	
+		$("#" + book.number).click((function() {
+			var j =	book;
+			return function() {
+				j.displayStatus();
+		}})());																																																	   //	
 	}
 }
 

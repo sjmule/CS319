@@ -6,11 +6,11 @@ $(document).ready(function() {
 
 function login()
 {
-	var user = document.getElementById("username").text;
-	var pass = document.getElementById("password").text;
+	var user = $("#username").val();
+	var pass = $("#password").val();
 	$("#message").text(user + " " + pass);
-	//$.post("checkLogin.php", {username:user, password:pass},function(data,success) {})
-	//	.fail(function() {
-	//		$("#message").text("Incorrect username or password");
-	//	});
+	$.post("checkLogin.php", {username : user,  password : pass}, function(data,success) {})
+		.fail(function() {
+			$("#message").text("Incorrect username or password");
+		});
 }

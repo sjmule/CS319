@@ -3,5 +3,5 @@
 	session_unset();
 	session_destroy();
 
-	header("Refresh:2; URL = login.html");
+	header("Location: login.html");
 ?>

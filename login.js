@@ -8,8 +8,10 @@ function login()
 {
 	var user = $("#username").val();
 	var pass = $("#password").val();
-	$.post("checkLogin.php", {username : user,  password : pass}, function() {
-		}).fail(function() {
+	$.post("checkLogin.php", {username : user,  password : pass}, function(data) {
+		if(data.success)
+			window.location.href = 'success.html';
+		else
 			$("#message").text("Incorrect username or password");
-		});
+		}, "json");
 }

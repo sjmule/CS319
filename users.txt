@@ -1,1 +1,1 @@
-scott:PassPhrase!
+scott:pass

@@ -1,7 +1,7 @@
 <?php
 	session_start();
-	unset($_SESSION["username"]);
-	unset($_SESSION["password"]);
+	session_unset();
+	session_destroy();
 
-	header('Refresh:2; URL = login.php;);
+	header("Refresh:2; URL = login.html");
 ?>

@@ -1,0 +1,18 @@
+<!DOCUMENT html>
+<html lang="en-US">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="app.js"></script>
+<body>
+
+	<h1>Welcome to the Library</h1>
+	<div ng-app="myApp" ng-controller="myController">
+		<table>
+			<th>Shelf</th> <th>Shelf</th>
+			<tr ng-repeat="book in books">
+				<td ng-repeat="val in book"> {{val}}</td>
+			</tr>
+		</table>
+	</div>
+
+</body>
+</html>

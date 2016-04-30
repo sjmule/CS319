@@ -1,0 +1,9 @@
+	<div ng-controller="posts">
+		<table>
+  			<tr ng-repeat="post in boardPosts" border="1">
+				<th>{{post.title}}</th>
+				<td>By:{{post.user}}</td>
+				<td>{{post.text}}</td>
+  			</tr>
+		</table>
+	</div>

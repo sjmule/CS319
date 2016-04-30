@@ -43,10 +43,10 @@ app.service('questionCollection', function() {
 });
 
 app.service('playerCollection', function() {
-	var players = 
-		[ {name:"Sean Connery", score: 1337},
-		 {name:"John Travolta", score: 1337},
-		 {name:"Keanu Reeves", score: 1337}]
+	var players =
+		 [{name:"Sean Connery", score: 1337},
+		  {name:"John Travolta", score: 1337},
+		  {name:"Keanu Reeves", score: 1337}]
 	this.getPlayers = function() {
 		return players;
 	}
@@ -58,7 +58,6 @@ app.config(function ($routeProvider) {
         templateUrl: "Cell.html"
     })
 	.when("/table", {
-        controller: "myController",
         templateUrl: "table.html"
     })
 	.otherwise( {
@@ -72,8 +71,8 @@ app.controller('myController', function ($scope, questionCollection) {
 	$scope.categories = questionCollection.getCategories();
 });
 
-app.controller('players', function($scope, $routeParams, playerCollection){
-	$scope.players = playerCollection.getCategories();
+app.controller('playerController', function($scope, playerCollection){
+	$scope.players = playerCollection.getPlayers();
 });
 
 app.controller('cell', function ($scope, $routeParams, questionCollection) {
@@ -103,8 +102,6 @@ app.controller('cell', function ($scope, $routeParams, questionCollection) {
 		}else
 			$scope.answer = "Category not found";
 	}
-	
-		
 	
 });
 

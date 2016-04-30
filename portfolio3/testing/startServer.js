@@ -70,7 +70,9 @@ listener.sockets.on('connection', function(socket)
 
 	socket.on('register', function(data)
 	{
-		players.push({"name": data.name, "score": 0});
+		players.push({"name": data.username, "score": 0});
+		console.log(data.username);
+		socket.emit('registered', 'good');
 		socket.emit('players', players);
 	});
 

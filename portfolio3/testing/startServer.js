@@ -12,6 +12,16 @@ var io = require('socket.io');
 
 var server = http.createServer();
 
+var questions;
+var players = [ {name:"Sean Connery", score: 1337},
+		 {name:"John Travolta", score: 1337},
+		 {name:"Keanu Reeves", score: 1337}];
+
+(function()
+{
+		questions= JSON.parse(fs.readFileSync('questions.json', 'utf-8'));
+})();
+
 // attach handler
 server.on('request', function (req,res)
 {
@@ -55,6 +65,11 @@ var listener = io.listen(server);
 
 listener.sockets.on('connection', function(socket)
 {
-	var obj = JSON.parse(fs.readFileSync('questions.json', 'utf-8'));
-	socket.emit('questions', obj);
+	socket.emit('questions', questions);
+	socket.emit('players', players);
+
+	socket.on('register', function(data)
+	{
+		players.push({"name": data.name, "score": 0});
+	});
 });

@@ -1,14 +1,19 @@
 var socket = io.connect();
 var app = angular.module('myApp', ['ngRoute']);
 
-app.config(function ($routeProvider) 
-{
+app.config(function ($routeProvider) {
     $routeProvider.when("/cell/:value/:category", {
         controller: "cell",
         templateUrl: "Cell.html"
+    })
+	.when("/table", {
+        controller: "myController",
+        templateUrl: "table.html"
+    })
+	.otherwise( {
+    	redirectTo: '/table'
     });
 });
-
 
 app.controller('myController', function ($scope, $rootScope)
 {
@@ -22,6 +27,15 @@ app.controller('myController', function ($scope, $rootScope)
 		{
 	 		$scope.$apply();
 	 	}
+	});
+});
+
+app.controller('playerController', function($scope)
+{
+	socket.on('players', function(data)
+	{
+		$scope.players = data;
+		$scope.$apply();
 	});
 });
 

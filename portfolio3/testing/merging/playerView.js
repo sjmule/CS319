@@ -1,48 +1,6 @@
 var socket = io.connect();
 var app = angular.module('myApp', ['ngRoute']);
 
-app.service('questionCollection', function() {
-	var categories =
-		[ {name: "Therapists",
-			Questions: [ {value: 200, status: "none", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 400, status: "none", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 600, status: "none", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 800, status: "hidden", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 1000, status: "none", question: "1984", answer: "George Orwell", DD: false}]
-		  },
-		  {name: "Catch These Men",
-			Questions: [ {value: 200, status: "none", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 400, status: "none", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 600, status: "none", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 800, status: "none", question: "1984", answer: "George Orwell", DD: true},
-					 {value: 1000, status: "none", question: "1984", answer: "George Orwell", DD: false}]
-		  },
-		  {name: "Famous Horsemen",
-			Questions: [ {value: 200, status: "none", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 400, status: "none", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 600, status: "none", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 800, status: "none", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 1000, status: "none", question: "1984", answer: "George Orwell", DD: false}]
-		  },
-		  {name: "The Pen Is Mightier",
-			Questions: [ {value: 200, status: "none", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 400, status: "none", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 600, status: "none", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 800, status: "none", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 1000, status: "none", question: "1984", answer: "George Orwell", DD: false}]
-		  },
-		  {name: "An Album Cover",
-			Questions: [ {value: 200, status: "none", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 400, status: "none", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 600, status: "hidden", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 800, status: "none", question: "1984", answer: "George Orwell", DD: false},
-					 {value: 1000, status: "none", question: "1984", answer: "George Orwell", DD: false}]
-		  }]
-	this.getCategories = function() {
-		return categories;
-	}
-});
-
 app.service('playerCollection', function() {
 	var players = 
 		[ {name:"Sean Connery", score: 1337},
@@ -73,8 +31,13 @@ app.controller('login', function ($scope, $rootScope)
 	});
 });
 
-app.controller('myController', function ($scope, questionCollection) {
-	$scope.categories = questionCollection.getCategories();
+app.controller('buzz', function ($scope, $rootScope)
+{
+
+	$scope.login = function()
+	{
+		socket.emit('buzz', {"username": $scope.username});
+	};
 });
 
 app.controller('players', function($scope, $routeParams, playerCollection){
@@ -82,16 +45,12 @@ app.controller('players', function($scope, $routeParams, playerCollection){
 });
 
 app.config(function ($routeProvider) {
-    $routeProvider.when("/game", {
+    $routeProvider.when("/table", {
         templateUrl: "table.html"
     })
-    .when("/login", {
-    	controller: "login",
-    	templateUrl: "login.html"
-    })
     .when("/question", {
-    	controller: "cell",
-    	templateUrl: "Cell.html"
+    	controller: "trebek",
+    	templateUrl: "trebec.html"
     })
     .otherwise( {
     	redirectTo: '/login'

@@ -71,5 +71,26 @@ listener.sockets.on('connection', function(socket)
 	socket.on('register', function(data)
 	{
 		players.push({"name": data.name, "score": 0});
+		socket.emit('players', players);
+	});
+
+	socket.on('updateScore', function(data)
+	{
+		for(var i = 0; i < players.length; i++)
+		{
+			if(players[i]["name"] === data.name)
+			{
+				if(date.action === "add")
+				{
+					players[i]["score"] = players[i]["score"] + data.score;
+				}
+				else
+				{
+					players[i]["score"] = players[i]["score"] - data.score;
+				}
+				break;
+			}
+		}
+		socket.emit('players', players);
 	});
 });

@@ -52,7 +52,7 @@ socket.on('displayQuestion', function(data)
 	window.location.href = "#/cell/" + data.value + "/" + data.category;
 });
 
-socket.on('displayTable', function(data)
+socket.on('displayTable', function(data, $rootScope)
 {
 	$rootScope.questions = data.questions;
 	window.location.href = "#/table";

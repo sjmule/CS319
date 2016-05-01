@@ -51,7 +51,6 @@ app.controller('cell', function ($scope, $routeParams, $rootScope)
 	
 	socket.on('playerBuzz', function(data)
 	{
-		console.log(data);
 		$scope.username = data;
 		$scope.$apply();
 	});
@@ -72,6 +71,6 @@ app.controller('cell', function ($scope, $routeParams, $rootScope)
 
 socket.on('displayTable', function(data, $rootScope)
 {
-	$rootScope.questions = data.questions;
+	$rootScope.questions = questions;
 	window.location.href = "#/table";
 });

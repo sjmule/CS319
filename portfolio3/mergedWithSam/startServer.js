@@ -15,6 +15,7 @@ var server = http.createServer();
 var questions;
 var players = [];
 var active = null;
+var ready = false;
 
 (function()
 {
@@ -130,10 +131,13 @@ listener.sockets.on('connection', function(socket)
 
 	socket.on('buzz', function(data)
 	{
-		if(active === null)
+		if(ready)
 		{
-			active = data.username;
-			socket.broadcast.emit('playerBuzz', data.username);
+			if(active === null)
+			{
+				active = data.username;
+				socket.broadcast.emit('playerBuzz', data.username);
+			}
 		}
 	});
 });

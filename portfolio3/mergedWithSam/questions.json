@@ -38,7 +38,7 @@
 		"Questions": [{
 			"value": 200,
 			"status": "none",
-			"question": "This J.M. Barrie character was /"the boy who wouldn't grow up/"",
+			"question": "This J.M. Barrie character was \"the boy who wouldn't grow up\"",
 			"answer": "Peter Pan",
 			"DD": false
 		}, {
@@ -56,7 +56,7 @@
 		}, {
 			"value": 800,
 			"status": "none",
-			"question": "In /"L.O.T.R./", this half-elf character renounces her eternal life to marry the mortal Aragorn & later dies aged 2,901",
+			"question": "In \"L.O.T.R.\", this half-elf character renounces her eternal life to marry the mortal Aragorn & later dies aged 2,901",
 			"answer": "Arwen",
 			"DD": true
 		}, {
@@ -96,7 +96,7 @@
 		}, {
 			"value": 1000,
 			"status": "none",
-			"question": "/"Equine/" piece of equipment for male gymnasts",
+			"question": "\"Equine\" piece of equipment for male gymnasts",
 			"answer": "a Pommel horse",
 			"DD": false
 		}]
@@ -112,7 +112,7 @@
 		}, {
 			"value": 400,
 			"status": "none",
-			"question": "The /"compass/" type of this flower is used on maps to indicate the cardinal directions",
+			"question": "The \"compass\" type of this flower is used on maps to indicate the cardinal directions",
 			"answer": "A Rose",
 			"DD": false
 		}, {
@@ -164,7 +164,7 @@
 		}, {
 			"value": 1000,
 			"status": "none",
-			"question": "Mickey Rourke finds a dastardly way to kill Elijah Wood (Frodo) in this /"urban/" movie",
+			"question": "Mickey Rourke finds a dastardly way to kill Elijah Wood (Frodo) in this \"urban\" movie",
 			"answer": "Sin City",
 			"DD": false
 		}]

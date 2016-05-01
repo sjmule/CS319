@@ -32,9 +32,6 @@ app.controller('myController', function ($scope, $rootScope)
 
 	socket.on('displayTable', function(data)
 	{
-		console.log(data);
-		console.log("f");
-		console.log($rootScope.questions);
 		$rootScope.questions = data;
 		window.location.href = "#/table";
 	});
@@ -60,6 +57,7 @@ app.controller('cell', function ($scope, $routeParams, $rootScope)
 	
 	socket.on('playerBuzz', function(data)
 	{
+		alert("Player buzz in " + data);
 		$scope.username = data;
 		$scope.$apply();
 	});

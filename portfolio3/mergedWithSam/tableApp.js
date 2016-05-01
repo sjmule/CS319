@@ -31,9 +31,6 @@ app.controller('myController', function ($scope, $rootScope)
 
 	socket.on('displayTable', function(data)
 	{
-		console.log(data);
-		console.log("f");
-		console.log($rootScope.questions);
 		$rootScope.questions = data;
 		window.location.href = "#/table";
 	});

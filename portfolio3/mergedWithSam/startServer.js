@@ -114,6 +114,7 @@ listener.sockets.on('connection', function(socket)
 
 	socket.on('timeOut', function(data)
 	{
+		active = null;
 		var pos = (data.score/200)-1;
 		questions[data.category]["Questions"][pos]["status"] = "hidden";
 
@@ -123,6 +124,7 @@ listener.sockets.on('connection', function(socket)
 
 	socket.on('goToQ', function(data)
 	{
+		active = null;
 		socket.broadcast.emit('displayQuestion', {"value": data.value, "category": data.category});
 	});
 

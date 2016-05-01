@@ -52,7 +52,7 @@ app.controller('cell', function ($scope, $routeParams, $rootScope)
 	socket.on('playerBuzz', function(data)
 	{
 		console.log(data);
-		$scope.username = data.username;
+		$scope.username = data;
 		$scope.$apply();
 	});
 

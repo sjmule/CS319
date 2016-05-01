@@ -102,9 +102,10 @@ listener.sockets.on('connection', function(socket)
 		socket.emit('players', players);
 		socket.broadcast.emit('players', players);
 		active = null;
-		socket.broadcast.emit('playerBuzz', " ");
+		socket.broadcast.emit('playerBuzz', "N/A");
 		if(back)
 		{
+			ready = false;
 			var pos = (data.score/200)-1;
 			questions[data.category]["Questions"][pos]["status"] = "hidden";
 
@@ -116,6 +117,7 @@ listener.sockets.on('connection', function(socket)
 	socket.on('timeOut', function(data)
 	{
 		active = null;
+		ready = false;
 		var pos = (data.score/200)-1;
 		questions[data.category]["Questions"][pos]["status"] = "hidden";
 
@@ -125,6 +127,7 @@ listener.sockets.on('connection', function(socket)
 
 	socket.on('goToQ', function(data)
 	{
+		ready = true;
 		active = null;
 		socket.broadcast.emit('displayQuestion', {"value": data.value, "category": data.category});
 	});

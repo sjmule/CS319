@@ -49,11 +49,11 @@ app.controller('cell', function ($scope, $routeParams, $rootScope)
 
 socket.on('displayQuestion', function(data)
 {
-	window.location.href = "/cell/:" + data.value + "/:" + data.category;
+	window.location.href = "#/cell/:" + data.value + "/:" + data.category;
 });
 
 socket.on('displayTable', function(data)
 {
 	$rootScope.questions = data.questions;
-	window.location.href = "/table";
+	window.location.href = "#/table";
 });

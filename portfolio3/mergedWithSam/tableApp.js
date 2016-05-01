@@ -43,6 +43,9 @@ app.controller('playerController', function($scope)
 
 app.controller('cell', function ($scope, $routeParams, $rootScope)
 {
+	console.log($rootScope.questions);
+	console.log($routeParams.category);
+	console.log($routeParams.value);
 	var pos = ($routeParams.value/200)-1;
 	$scope.question = $rootScope.questions[$routeParams.category]["Questions"][pos]["question"];
 });

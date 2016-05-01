@@ -13,9 +13,8 @@ var io = require('socket.io');
 var server = http.createServer();
 
 var questions;
-var players = [ {name:"Sean Connery", score: 1337},
-		 {name:"John Travolta", score: 1337},
-		 {name:"Keanu Reeves", score: 1337}];
+var players = [];
+var active = null;
 
 (function()
 {
@@ -101,6 +100,7 @@ listener.sockets.on('connection', function(socket)
 		}
 		socket.emit('players', players);
 		socket.broadcast.emit('players', players);
+		active = null;
 		if(back)
 		{
 			var pos = (data.score/200)-1;
@@ -123,5 +123,14 @@ listener.sockets.on('connection', function(socket)
 	socket.on('goToQ', function(data)
 	{
 		socket.broadcast.emit('displayQuestion', {"value": data.value, "category": data.category});
+	});
+
+	socket.on('buzz', function(data)
+	{
+		if(active === null)
+		{
+			active = data.username;
+			socket.broadcast.emit('playerBuzz', data.username);
+		}
 	});
 });

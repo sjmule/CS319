@@ -1,6 +1,20 @@
 var socket = io.connect();
 var app = angular.module('myApp', ['ngRoute']);
 
+app.config(function ($routeProvider) {
+    $routeProvider.when("/game", {
+    	controller: "buzz",
+    	templateUrl: "Game.html"
+    })
+    .when("/login", {
+    	controller: "login",
+    	templateUrl: "login.html"
+    })
+    .otherwise( {
+    	redirectTo: '/login'
+    });
+});
+
 app.controller('login', function ($scope, $rootScope)
 {
 	$scope.username = '';
@@ -34,18 +48,4 @@ app.controller('playerController', function($scope)
 		$scope.players = data;
 		$scope.$apply();
 	});
-});
-
-app.config(function ($routeProvider) {
-    $routeProvider.when("/game", {
-    	controller: "buzz",
-    	templateUrl: "Game.html"
-    })
-    .when("/login", {
-    	controller: "login",
-    	templateUrl: "login.html"
-    })
-    .otherwise( {
-    	redirectTo: '/login'
-    });
 });

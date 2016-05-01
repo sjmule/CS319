@@ -82,6 +82,7 @@ listener.sockets.on('connection', function(socket)
 
 	socket.on('updateScore', function(data)
 	{
+		var back = false;
 		for(var i = 0; i < players.length; i++)
 		{
 			if(players[i]["name"] === data.name)
@@ -89,6 +90,7 @@ listener.sockets.on('connection', function(socket)
 				if(date.action === "add")
 				{
 					players[i]["score"] = players[i]["score"] + data.score;
+					back = true;
 				}
 				else
 				{
@@ -99,5 +101,15 @@ listener.sockets.on('connection', function(socket)
 		}
 		socket.emit('players', players);
 		socket.broadcast.emit('players', players);
+		if(back)
+		{
+			socket.emit('table', 'g');
+			socket.broadcast.emit('table', 'g');
+	
+			
+	
+			socket.emit('questions', questions);
+			socket.broadcast.emit('questions', questions);
+		}
 	});
 });

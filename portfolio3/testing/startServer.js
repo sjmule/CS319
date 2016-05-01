@@ -103,13 +103,25 @@ listener.sockets.on('connection', function(socket)
 		socket.broadcast.emit('players', players);
 		if(back)
 		{
-			socket.emit('table', 'g');
-			socket.broadcast.emit('table', 'g');
-	
-			
-	
-			socket.emit('questions', questions);
-			socket.broadcast.emit('questions', questions);
+			var pos = (data.score/200)-1;
+			questions[data.category]["Questions"][pos]["status"] = "hidden";
+
+			socket.emit('displayTable', questions);
+			socket.broadcast.emit('displayTable', questions);
 		}
+	});
+
+	socket.on('timeOut', function(data)
+	{
+		var pos = (data.score/200)-1;
+		questions[data.category]["Questions"][pos]["status"] = "hidden";
+
+		socket.emit('displayTable', questions);
+		socket.broadcast.emit('displayTable', questions);
+	});
+
+	socket.on('goToQ', function(data)
+	{
+		socket.broadcast.emit('displayQuestion', {"value": data.value, "category": data.category});
 	});
 });

@@ -32,6 +32,8 @@ app.controller('myController', function ($scope, $rootScope)
 
 app.controller('playerController', function($scope)
 {
+	if($scope.players === undefined)
+		socket.emit('getPlayers', 'get');
 	socket.on('players', function(data)
 	{
 		$scope.players = data;
@@ -45,4 +47,13 @@ app.controller('cell', function ($scope, $routeParams, $rootScope)
 	$scope.question = $rootScope.questions[$routeParams.category]["Questions"][pos]["question"];
 });
 
+socket.on('displayQuestion', function(data)
+{
+	window.location.href = "/cell/:" + data.value + "/:" + data.category;
+});
 
+socket.on('displayTable', function(data)
+{
+	$rootScope.questions = data.questions;
+	window.location.href = "/table";
+});

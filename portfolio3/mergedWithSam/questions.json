@@ -3,31 +3,31 @@
 		"name": "Therapists",
 		"Questions": [{
 			"value": 200,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 400,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 600,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 800,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 1000,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
@@ -37,31 +37,31 @@
 		"name": "Catch These Men",
 		"Questions": [{
 			"value": 200,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 400,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 600,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 800,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": true
 		}, {
 			"value": 1000,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
@@ -71,31 +71,31 @@
 		"name": "Famous Horsemen",
 		"Questions": [{
 			"value": 200,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 400,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 600,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 800,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 1000,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
@@ -105,31 +105,31 @@
 		"name": "The Pen Is Mightier",
 		"Questions": [{
 			"value": 200,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 400,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 600,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 800,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 1000,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
@@ -139,31 +139,31 @@
 		"name": "An Album Cover",
 		"Questions": [{
 			"value": 200,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 400,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell ",
 			"DD": false
 		}, {
 			"value": 600,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 800,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false
 		}, {
 			"value": 1000,
-			"status": true,
+			"status": "none",
 			"question": "1984",
 			"answer": "George Orwell",
 			"DD": false

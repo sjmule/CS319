@@ -87,7 +87,7 @@ listener.sockets.on('connection', function(socket)
 		for(var i = 0; i < players.length; i++)
 		{
 			console.log(i);
-			if(players[i]["name"] === data.name)
+			if(players[i]["name"] === data.username)
 			{
 				console.log(players[i]["name"]);
 				if(date.action === "add")
@@ -107,6 +107,7 @@ listener.sockets.on('connection', function(socket)
 		socket.emit('players', players);
 		socket.broadcast.emit('players', players);
 		active = null;
+		socket.broadcast.emit('playerBuzz', " ");
 		if(back)
 		{
 			var pos = (data.score/200)-1;

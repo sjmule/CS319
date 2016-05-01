@@ -88,12 +88,12 @@ listener.sockets.on('connection', function(socket)
 			{
 				if(data.action === "add")
 				{
-					players[i]["score"] = players[i]["score"] + data.score;
+					players[i]["score"] = parseInt(players[i]["score"]) + parseInt(data.score);
 					back = true;
 				}
 				else
 				{
-					players[i]["score"] = players[i]["score"] - data.score;
+					players[i]["score"] = parseInt(players[i]["score"]) - parseInt(data.score);
 				}
 				break;
 			}

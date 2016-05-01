@@ -54,6 +54,6 @@ socket.on('displayQuestion', function(data)
 
 socket.on('displayTable', function(data, $rootScope)
 {
-	$rootScope.questions = data.questions;
+	$rootScope.questions = data;
 	window.location.href = "#/table";
 });

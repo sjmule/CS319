@@ -71,6 +71,6 @@ app.controller('cell', function ($scope, $routeParams, $rootScope)
 
 socket.on('displayTable', function(data, $rootScope)
 {
-	$rootScope.questions = questions;
+	$rootScope.questions = data;
 	window.location.href = "#/table";
 });

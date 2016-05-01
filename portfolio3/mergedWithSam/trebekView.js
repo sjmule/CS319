@@ -30,7 +30,7 @@ app.controller('myController', function ($scope, $rootScope)
 	 	}
 	});
 
-	socket.on('displayTable', function(data, $rootScope)
+	socket.on('displayTable', function(data)
 	{
 		console.log(data);
 		console.log("f");

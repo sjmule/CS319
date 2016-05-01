@@ -44,7 +44,7 @@ app.controller('playersController', function($scope)
 
 app.controller('cell', function ($scope, $routeParams, $rootScope)
 {
-	soket.emit('goToQ', {"category": $routeParams.category, "value": $routeParams.value});
+	socket.emit('goToQ', {"category": $routeParams.category, "value": $routeParams.value});
 	var pos = ($routeParams.value/200)-1;
 	$scope.answer = $rootScope.questions[$routeParams.category]["Questions"][pos]["answer"];
 	$scope.question = $rootScope.questions[$routeParams.category]["Questions"][pos]["question"];

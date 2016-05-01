@@ -82,17 +82,23 @@ listener.sockets.on('connection', function(socket)
 	socket.on('updateScore', function(data)
 	{
 		var back = false;
+		console.log(data);
+		console.log(players.length);
 		for(var i = 0; i < players.length; i++)
 		{
+			console.log(i);
 			if(players[i]["name"] === data.name)
 			{
+				console.log(players[i]["name"]);
 				if(date.action === "add")
 				{
+					console.log("add");
 					players[i]["score"] = players[i]["score"] + data.score;
 					back = true;
 				}
 				else
 				{
+					console.log("sub");
 					players[i]["score"] = players[i]["score"] - data.score;
 				}
 				break;
@@ -127,12 +133,9 @@ listener.sockets.on('connection', function(socket)
 
 	socket.on('buzz', function(data)
 	{
-		console.log("buzz");
 		if(active === null)
 		{
-			console.log("valid");
 			active = data.username;
-			console.log(active);
 			socket.broadcast.emit('playerBuzz', data.username);
 		}
 	});

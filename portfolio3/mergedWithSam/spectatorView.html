@@ -14,13 +14,13 @@
 	<div ng-view></div>
 
 	<div ng-controller='playerController'>
-	<table>
-	<tr> <th>Player</th> <th>Score</th> </tr>
-	<tr ng-repeat="player in players">
-		<th>{{player.name}}</th>
-		<td>{{player.score}}</td>
-	</tr>
-	</table>
+		<table>
+			<tr> <th>Player</th> <th>Score</th> </tr>
+			<tr ng-repeat="player in players">
+				<th>{{player.name}}</th>
+				<td>{{player.score}}</td>
+			</tr>
+		</table>
 	</div>
 	
 </body>

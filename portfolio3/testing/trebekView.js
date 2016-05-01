@@ -4,14 +4,14 @@ var app = angular.module('myApp', ['ngRoute']);
 app.config(function ($routeProvider)
 {
     $routeProvider.when("/table", {
-    	controller: "myController",
-    	templateUrl: "table.html"
+        controller: "myController",
+        templateUrl: "table.html"
     })
     .when("/question/:value/:category", {
     	controller: "cell",
     	templateUrl: "trebekCell.html"
     })
-    .otherwise( {
+   .otherwise( {
     	redirectTo: '/table'
     });
 });
@@ -31,7 +31,7 @@ app.controller('myController', function ($scope)
 	});
 });
 
-app.controller('players', function($scope)
+app.controller('playersController', function($scope)
 {
 	if($scope.players === undefined)
 		socket.emit('getPlayers', 'get');

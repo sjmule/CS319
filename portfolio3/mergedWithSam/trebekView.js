@@ -16,7 +16,7 @@ app.config(function ($routeProvider)
     });
 });
 
-app.controller('myController', function ($scope)
+app.controller('myController', function ($scope, $rootScope)
 {
 	$scope.categories = $rootScope.questions;
 

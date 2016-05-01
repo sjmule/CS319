@@ -35,6 +35,7 @@ app.controller('buzz', function ($scope, $rootScope)
 {
 	$scope.buzz = function()
 	{
+		console.log($rootScope.username);
 		socket.emit('buzz', {"username": $rootScope.username});
 	};
 });

@@ -127,8 +127,10 @@ listener.sockets.on('connection', function(socket)
 
 	socket.on('buzz', function(data)
 	{
+		console.log("buzz");
 		if(active === null)
 		{
+			console.log("valid");
 			active = data.username;
 			socket.broadcast.emit('playerBuzz', data.username);
 		}

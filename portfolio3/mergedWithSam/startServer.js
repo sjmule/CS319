@@ -102,7 +102,7 @@ listener.sockets.on('connection', function(socket)
 		socket.emit('players', players);
 		socket.broadcast.emit('players', players);
 		active = null;
-		socket.broadcast.emit('playerBuzz', "N/A");
+		socket.broadcast.emit('playerBuzz', active);
 		if(back)
 		{
 			ready = false;

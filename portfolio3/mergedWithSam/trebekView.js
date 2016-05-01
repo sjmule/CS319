@@ -57,7 +57,7 @@ app.controller('cell', function ($scope, $routeParams, $rootScope)
 	
 	socket.on('playerBuzz', function(data)
 	{
-		alert("Player buzz in " + data);
+		alert("Player buzz in " + data + " for " + $routeParams.category + " for " + $routeParams.value);
 		$scope.username = data;
 		$scope.$apply();
 	});

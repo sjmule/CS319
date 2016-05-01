@@ -73,14 +73,6 @@ app.controller('login', function ($scope, $rootScope)
 	});
 });
 
-app.controller('buzz', function ($scope, $rootScope)
-{
-
-	$scope.login = function()
-	{
-		socket.emit('buzz', {"username": $scope.username});
-	};
-});
 
 app.controller('myController', function ($scope, questionCollection) {
 	$scope.categories = questionCollection.getCategories();
@@ -91,51 +83,37 @@ app.controller('players', function($scope, $routeParams, playerCollection){
 });
 
 app.config(function ($routeProvider) {
-    $routeProvider.when("/game", {
-        templateUrl: "Game.html"
+    $routeProvider.when("/table", {
+    	controller: "myController",
+    	templateUrl: "table.html"
     })
-    .when("/login", {
-    	controller: "login",
-    	templateUrl: "login.html"
-    })
-    .when("/question", {
+    .when("/question/:value/:category", {
     	controller: "cell",
-    	templateUrl: "Cell.html"
+    	templateUrl: "trebekCell.html"
     })
     .otherwise( {
-    	redirectTo: '/login'
+    	redirectTo: '/table'
     });
 });
 
-
-
-app.controller('cell', function ($scope, $routeParams, questionCollection) {
-	$scope.category = $routeParams.category;
-	$scope.value = $routeParams.value;
-	var cataQuestions = angular.fromJson(questionCollection.getCategories());
-	var found = false;
-	for ( i = 0; i < cataQuestions.length; i++)
+app.controller('cell', function ($scope, $routeParams, $rootScope) {
+	var pos = ($routeParams.value/200)-1;
+	$scope.answer = $rootScope.questions[$routeParams.category]["Questions"][pos]["answer"];
+	$scope.question = $rootScope.questions[$routeParams.category]["Questions"][pos]["question"];
+	
+	$scope.yes = function()
 	{
-		if (cataQuestions[i].name == $routeParams.category )
-		{
-			for ( j = 0; j < cataQuestions[i].Questions.length; j++)
-			{
-				if (cataQuestions[i].Questions[j].value == $routeParams.value)
-				{
-					$scope.answer = cataQuestions[i].Questions[j].answer;
-					$scope.question = cataQuestions[i].Questions[j].question;
-					$scope.DD = cataQuestions[i].Questions[j].DD;
-					found = true;
-					break;
-				}else
-				$scope.answer = "Val not found";
-			}
-			if ( found == true )
-				break;
-			
-		}else
-			$scope.answer = "Category not found";
-	}
+		socket.emit('updateScore', {"username": $rootScope.username, "action": "add", "score":$routeParams.value, "category": $routeParams.category});
+	};
+	$scope.no = function()
+	{
+		socket.emit('updateScore', {"username": $rootScope.username, "action": "awh hell naw", "score":$routeParams.value, "category": $routeParams.category});
+	};
+	$scope.timeOut = function()
+	{
+		socket.emit('updateScore', {"score":$routeParams.value, "category": $routeParams.category});
+	};
+	
 	
 });
 

@@ -29,6 +29,15 @@ app.controller('myController', function ($scope, $rootScope)
 	 		$scope.$apply();
 	 	}
 	});
+
+	socket.on('displayTable', function(data, $rootScope)
+	{
+		console.log(data);
+		console.log("f");
+		console.log($rootScope.questions);
+		$rootScope.questions = data;
+		window.location.href = "#/table";
+	});
 });
 
 app.controller('playersController', function($scope)
@@ -67,13 +76,4 @@ app.controller('cell', function ($scope, $routeParams, $rootScope)
 	{
 		socket.emit('timeOut', {"score":$routeParams.value, "category": $routeParams.category});
 	};	
-});
-
-socket.on('displayTable', function(data, $rootScope)
-{
-	console.log(data);
-	console.log("f");
-	console.log($rootScope.questions);
-	$rootScope.questions = data;
-	window.location.href = "#/table";
 });

@@ -28,6 +28,15 @@ app.controller('myController', function ($scope, $rootScope)
 	 		$scope.$apply();
 	 	}
 	});
+
+	socket.on('displayTable', function(data, $rootScope)
+	{
+		console.log(data);
+		console.log("f");
+		console.log($rootScope.questions);
+		$rootScope.questions = data;
+		window.location.href = "#/table";
+	});
 });
 
 app.controller('playerController', function($scope)
@@ -50,13 +59,4 @@ app.controller('cell', function ($scope, $routeParams, $rootScope)
 socket.on('displayQuestion', function(data)
 {
 	window.location.href = "#/cell/" + data.value + "/" + data.category;
-});
-
-socket.on('displayTable', function(data, $rootScope)
-{
-	console.log(data);
-	console.log("f");
-	console.log($rootScope.questions);
-	$rootScope.questions = data;
-	window.location.href = "#/table";
 });

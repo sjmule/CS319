@@ -68,12 +68,16 @@ listener.sockets.on('connection', function(socket)
 	socket.emit('questions', questions);
 	socket.emit('players', players);
 
+	socket.on('getPlayers', function(data)
+	{
+		socket.emit('players', players);
+	});
+
 	socket.on('register', function(data)
 	{
 		players.push({"name": data.username, "score": 0});
-		console.log(data.username);
 		socket.emit('registered', 'good');
-		socket.emit('players', players);
+		socket.broadcast.emit('players', players);
 	});
 
 	socket.on('updateScore', function(data)
@@ -94,5 +98,6 @@ listener.sockets.on('connection', function(socket)
 			}
 		}
 		socket.emit('players', players);
+		socket.broadcast.emit('players', players);
 	});
 });

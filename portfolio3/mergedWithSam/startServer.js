@@ -12,6 +12,16 @@ var io = require('socket.io');
 
 var server = http.createServer();
 
+var questions;
+var players = [ {name:"Sean Connery", score: 1337},
+		 {name:"John Travolta", score: 1337},
+		 {name:"Keanu Reeves", score: 1337}];
+
+(function()
+{
+		questions= JSON.parse(fs.readFileSync('questions.json', 'utf-8'));
+})();
+
 // attach handler
 server.on('request', function (req,res)
 {
@@ -55,6 +65,39 @@ var listener = io.listen(server);
 
 listener.sockets.on('connection', function(socket)
 {
-	var obj = JSON.parse(fs.readFileSync('questions.json', 'utf-8'));
-	socket.emit('questions', obj);
+	socket.emit('questions', questions);
+	socket.emit('players', players);
+
+	socket.on('getPlayers', function(data)
+	{
+		socket.emit('players', players);
+	});
+
+	socket.on('register', function(data)
+	{
+		players.push({"name": data.username, "score": 0});
+		socket.emit('registered', 'good');
+		socket.broadcast.emit('players', players);
+	});
+
+	socket.on('updateScore', function(data)
+	{
+		for(var i = 0; i < players.length; i++)
+		{
+			if(players[i]["name"] === data.name)
+			{
+				if(date.action === "add")
+				{
+					players[i]["score"] = players[i]["score"] + data.score;
+				}
+				else
+				{
+					players[i]["score"] = players[i]["score"] - data.score;
+				}
+				break;
+			}
+		}
+		socket.emit('players', players);
+		socket.broadcast.emit('players', players);
+	});
 });

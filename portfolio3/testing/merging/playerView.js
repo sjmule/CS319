@@ -48,9 +48,9 @@ app.config(function ($routeProvider) {
     $routeProvider.when("/table", {
         templateUrl: "table.html"
     })
-    .when("/question", {
-    	controller: "trebek",
-    	templateUrl: "trebec.html"
+    .when("/game", {
+    	controller: "buzz",
+    	templateUrl: "Game.html"
     })
     .otherwise( {
     	redirectTo: '/login'

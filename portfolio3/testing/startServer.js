@@ -132,6 +132,7 @@ listener.sockets.on('connection', function(socket)
 		{
 			console.log("valid");
 			active = data.username;
+			console.log(active);
 			socket.broadcast.emit('playerBuzz', data.username);
 		}
 	});

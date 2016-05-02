@@ -1,6 +1,7 @@
 var socket = io.connect();
 var app = angular.module('myApp', ['ngRoute']);
 
+// route handler
 app.config(function ($routeProvider) {
     $routeProvider.when("/cell/:value/:category", {
         controller: "cell",
@@ -15,6 +16,7 @@ app.config(function ($routeProvider) {
     });
 });
 
+// controller for the default view, loads the table
 app.controller('myController', function ($scope, $rootScope)
 {
 	$scope.categories = $rootScope.questions;
@@ -36,6 +38,7 @@ app.controller('myController', function ($scope, $rootScope)
 	});
 });
 
+// controller for displaying the player table
 app.controller('playerController', function($scope)
 {
 	if($scope.players === undefined)
@@ -47,12 +50,14 @@ app.controller('playerController', function($scope)
 	});
 });
 
+// controller for when a question is displayed instead of the table
 app.controller('cell', function ($scope, $routeParams, $rootScope)
 {
 	var pos = ($routeParams.value/200)-1;
 	$scope.question = $rootScope.questions[$routeParams.category]["Questions"][pos]["question"];
 });
 
+// switches the view to the 'cell' view when Trebek selects a question
 socket.on('displayQuestion', function(data)
 {
 	window.location.href = "#/cell/" + data.value + "/" + data.category;

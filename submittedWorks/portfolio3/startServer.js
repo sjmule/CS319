@@ -5,11 +5,6 @@ var url = require('url');
 var fs = require('fs');
 var io = require('socket.io');
 
-//----------------------------------------
-// What follows is to set up the http
-// server to handle requests
-//----------------------------------------
-
 var server = http.createServer();
 
 var questions;
@@ -17,12 +12,18 @@ var players = [];
 var active = null;
 var ready = false;
 
+// load question data
 (function()
 {
 		questions= JSON.parse(fs.readFileSync('questions.json', 'utf-8'));
 })();
 
-// attach handler
+//----------------------------------------
+// What follows is to set up the http
+// server to handle requests
+//----------------------------------------
+
+// attach HTTP request handler
 server.on('request', function (req,res)
 {
 	var file = path.normalize('.' + req.url);
@@ -63,16 +64,20 @@ server.listen(1337, function() {
 
 var listener = io.listen(server);
 
+// on connection
 listener.sockets.on('connection', function(socket)
 {
+	// send question data and player data
 	socket.emit('questions', questions);
 	socket.emit('players', players);
 
+	// fullfil a client's request for player data
 	socket.on('getPlayers', function(data)
 	{
 		socket.emit('players', players);
 	});
 
+	// when a player attempts to register
 	socket.on('register', function(data)
 	{
 		players.push({"name": data.username, "score": 0});
@@ -80,6 +85,7 @@ listener.sockets.on('connection', function(socket)
 		socket.broadcast.emit('players', players);
 	});
 
+	// when Trebek wishes to award or remove points to a player
 	socket.on('updateScore', function(data)
 	{
 		var back = false;
@@ -115,6 +121,7 @@ listener.sockets.on('connection', function(socket)
 		}
 	});
 
+	// when no one answers the quetion
 	socket.on('timeOut', function(data)
 	{
 		active = null;
@@ -126,6 +133,7 @@ listener.sockets.on('connection', function(socket)
 		socket.broadcast.emit('displayTable', questions);
 	});
 
+	// when Trebek selects a question
 	socket.on('goToQ', function(data)
 	{
 		ready = true;
@@ -133,6 +141,7 @@ listener.sockets.on('connection', function(socket)
 		socket.broadcast.emit('displayQuestion', {"value": data.value, "category": data.category});
 	});
 
+	// when a player buzzes in
 	socket.on('buzz', function(data)
 	{
 		if(ready)

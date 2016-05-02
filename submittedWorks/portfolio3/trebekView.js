@@ -1,6 +1,7 @@
 var socket = io.connect();
 var app = angular.module('myApp', ['ngRoute']);
 
+// route handler
 app.config(function ($routeProvider)
 {
     $routeProvider.when("/table", {
@@ -16,6 +17,7 @@ app.config(function ($routeProvider)
     });
 });
 
+// controller for the default view, loads the table
 app.controller('myController', function ($scope, $rootScope)
 {
 	$scope.categories = $rootScope.questions;
@@ -37,6 +39,7 @@ app.controller('myController', function ($scope, $rootScope)
 	});
 });
 
+// controller for displaying the player table
 app.controller('playersController', function($scope)
 {
 	if($scope.players === undefined)
@@ -48,6 +51,7 @@ app.controller('playersController', function($scope)
 	});
 });
 
+// controller for when Trebek selects a question
 app.controller('cell', function ($scope, $routeParams, $rootScope)
 {
 	socket.emit('goToQ', {"category": $routeParams.category, "value": $routeParams.value});

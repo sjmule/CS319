@@ -1,6 +1,7 @@
 var socket = io.connect();
 var app = angular.module('myApp', ['ngRoute']);
 
+// route handler
 app.config(function ($routeProvider) {
     $routeProvider.when("/game", {
     	controller: "buzz",
@@ -15,6 +16,7 @@ app.config(function ($routeProvider) {
     });
 });
 
+// controller for the login view
 app.controller('login', function ($scope, $rootScope)
 {
 	$scope.username = '';
@@ -31,6 +33,7 @@ app.controller('login', function ($scope, $rootScope)
 	});
 });
 
+// controller for when the player buzzes in
 app.controller('buzz', function ($scope, $rootScope)
 {
 	$scope.buzz = function()
@@ -39,6 +42,7 @@ app.controller('buzz', function ($scope, $rootScope)
 	};
 });
 
+// controller for displaying the player table
 app.controller('playerController', function($scope)
 {
 	if($scope.players === undefined)
